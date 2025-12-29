@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Slide 5 - Proposed Strategy</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Noto+Sans+KR:wght@300;400;500;700&amp;family=Fira+Code:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #0F172A; /* Slate 900 */
+      color: #fff;
+      overflow: hidden;
+    }
+    .slide-container {
+      width: 1280px;
+      height: 720px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      background-color: #0F172A;
+      /* Subtle grid background */
+      background-image: linear-gradient(#1e293b 1px, transparent 1px), linear-gradient(90deg, #1e293b 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    /* Ticket Card Styles */
+    .ticket-card {
+      background: #fff;
+      color: #333;
+      border-left: 6px solid #0052CC; /* Jira Blue */
+      border-radius: 8px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.3s ease;
+    }
+    
+    /* Branch Card Styles */
+    .branch-card {
+      background: #1E1E1E; /* VS Code Dark */
+      border: 1px solid #333;
+      border-radius: 8px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+      position: relative;
+      font-family: 'Fira Code', monospace;
+    }
+
+    /* Connection Line */
+    .connection-line {
+      height: 4px;
+      background: #475569;
+      position: relative;
+      border-radius: 2px;
+    }
+    .connection-line::after {
+      content: '';
+      position: absolute;
+      top: -6px;
+      right: 0;
+      width: 16px;
+      height: 16px;
+      border-top: 4px solid #475569;
+      border-right: 4px solid #475569;
+      transform: rotate(45deg);
+    }
+    
+    /* Animated Flow Dots */
+    .flow-dot {
+      position: absolute;
+      top: -3px;
+      width: 10px;
+      height: 10px;
+      background: #3B82F6;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #3B82F6;
+      animation: flow 2s linear infinite;
+    }
+    
+    @keyframes flow {
+      0% { left: 0; opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { left: 100%; opacity: 0; }
+    }
+
+    /* Syntax Highlight Box */
+    .syntax-box {
+      background: rgba(30, 41, 59, 0.5);
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      backdrop-filter: blur(4px);
+      border-radius: 12px;
+    }
+
+    .glass-panel {
+      background: rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(8px);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .badge-type { background-color: #8B5CF6; color: white; } /* Purple */
+    .badge-id { background-color: #EF4444; color: white; } /* Red */
+    .badge-desc { background-color: #10B981; color: white; } /* Green */
+
+  </style>
+</head>
+<body>
+<div class="slide-container font-sans">
+<!-- Header -->
+<div class="relative z-10 px-12 pt-12 pb-6">
+<div class="flex items-center space-x-3 mb-2">
+<span class="px-3 py-1 bg-green-900 text-green-300 text-xs font-mono rounded border border-green-700">STRATEGY</span>
+</div>
+<h1 class="text-4xl font-bold tracking-tight text-white mb-2">
+            우리의 새로운 약속: <span class="text-blue-400">1 Issue</span>, <span class="text-amber-400">1 Branch</span>
+</h1>
+<p class="text-gray-400 text-lg font-light">
+            작업의 목적이 브랜치 이름만 봐도 드러나야 합니다.
+        </p>
+</div>
+<!-- Main Content -->
+<div class="flex-1 flex flex-col justify-center px-16 relative z-10 -mt-8">
+<!-- Mapping Visualization Section -->
+<div class="flex items-center justify-between w-full max-w-6xl mx-auto mb-16">
+<!-- 1. Issue Ticket (Left) -->
+<div class="w-5/12 relative">
+<div class="absolute -top-8 left-0 text-blue-400 font-mono font-bold text-sm tracking-wider">
+<i class="fas fa-ticket-alt mr-2"></i>TASK / ISSUE
+            </div>
+<div class="ticket-card p-6 min-h-[180px] flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center space-x-2">
+<span class="bg-blue-100 text-blue-800 text-xs font-bold px-2 py-0.5 rounded">JIRA</span>
+<span class="text-gray-500 font-mono text-sm">PROJ-102</span>
+</div>
+<span class="bg-gray-200 text-gray-600 text-xs px-2 py-1 rounded">To Do</span>
+</div>
+<div class="mb-2">
+<h3 class="text-xl font-bold text-gray-800 leading-snug">로그인 API 구현 및 JWT 연동</h3>
+</div>
+<div class="flex items-center mt-auto pt-4 border-t border-gray-100">
+<div class="w-6 h-6 rounded-full bg-gray-300 mr-2 flex items-center justify-center text-xs text-gray-600">JS</div>
+<span class="text-xs text-gray-500">Assigned to <span class="font-semibold">Developer Kim</span></span>
+</div>
+</div>
+<!-- Connector Dot -->
+<div class="absolute top-1/2 right-[-6px] transform -translate-y-1/2 w-3 h-3 bg-blue-500 rounded-full z-20 border-2 border-white"></div>
+</div>
+<!-- 2. Connection (Center) -->
+<div class="w-2/12 flex flex-col items-center justify-center px-4 relative">
+<div class="w-full connection-line">
+<div class="flow-dot"></div>
+</div>
+<div class="mt-4 text-center">
+<div class="bg-gray-800 text-gray-300 text-xs px-3 py-1 rounded-full border border-gray-600">
+<i class="fas fa-link mr-1"></i> Mapped
+            </div>
+</div>
+</div>
+<!-- 3. Git Branch (Right) -->
+<div class="w-5/12 relative">
+<div class="absolute -top-8 right-0 text-amber-500 font-mono font-bold text-sm tracking-wider">
+              GIT BRANCH <i class="fas fa-code-branch ml-2"></i>
+</div>
+<div class="branch-card p-6 min-h-[180px] flex flex-col justify-center">
+<div class="flex items-center text-gray-400 text-xs font-mono mb-2">
+<i class="fas fa-terminal mr-2"></i> terminal
+            </div>
+<div class="font-mono text-xl text-green-400 mb-4 break-all">
+<span class="text-purple-400">git</span> checkout -b <br/>
+<span class="text-white font-bold bg-gray-800 px-1 rounded">feature/102-login-api</span>
+</div>
+<div class="flex items-center space-x-2 text-xs text-gray-500 font-mono border-t border-gray-700 pt-3">
+<i class="fas fa-info-circle"></i>
+<span>Created from 'master'</span>
+</div>
+</div>
+<!-- Connector Dot -->
+<div class="absolute top-1/2 left-[-6px] transform -translate-y-1/2 w-3 h-3 bg-amber-500 rounded-full z-20 border-2 border-gray-900"></div>
+</div>
+</div>
+<!-- Naming Convention Rules -->
+<div class="syntax-box w-full max-w-5xl mx-auto p-8 relative overflow-hidden">
+<!-- Label -->
+<div class="absolute top-0 left-0 bg-gray-700 text-white text-xs font-bold px-3 py-1 rounded-br-lg">
+            NAMING CONVENTION
+          </div>
+<div class="flex flex-col items-center justify-center pt-2">
+<p class="text-gray-400 text-sm mb-4 font-mono">브랜치 이름은 아래 3가지 요소를 반드시 포함해야 합니다:</p>
+<div class="flex items-center space-x-2 text-2xl font-mono font-bold">
+<!-- Part 1: Type -->
+<div class="flex flex-col items-center group">
+<span class="text-purple-400 mb-2">feature</span>
+<div class="h-1 w-full bg-purple-500 rounded mb-2"></div>
+<span class="text-xs text-purple-300 font-sans font-normal opacity-80">Type</span>
+</div>
+<span class="text-gray-500 pb-6">/</span>
+<!-- Part 2: ID -->
+<div class="flex flex-col items-center group">
+<span class="text-red-400 mb-2">102</span>
+<div class="h-1 w-full bg-red-500 rounded mb-2"></div>
+<span class="text-xs text-red-300 font-sans font-normal opacity-80">Issue #</span>
+</div>
+<span class="text-gray-500 pb-6">-</span>
+<!-- Part 3: Description -->
+<div class="flex flex-col items-center group">
+<span class="text-green-400 mb-2">login-api</span>
+<div class="h-1 w-full bg-green-500 rounded mb-2"></div>
+<span class="text-xs text-green-300 font-sans font-normal opacity-80">Description</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Panel: Benefits/Logic -->
+<div class="absolute bottom-0 w-full glass-panel py-4 px-12 z-20">
+<div class="flex justify-between items-center text-sm text-gray-400">
+<div class="flex items-center space-x-8">
+<p class="flex items-center"><i class="fas fa-check text-blue-500 mr-2"></i> 작업의 <strong class="text-white ml-1">독립성 보장</strong></p>
+<p class="flex items-center"><i class="fas fa-check text-blue-500 mr-2"></i> 이슈 추적 <strong class="text-white ml-1">100% 가능</strong></p>
+</div>
+<div class="font-mono text-gray-500">
+<i class="fab fa-git-alt mr-2"></i> Git Workflow Strategy <span class="mx-2">|</span> 05 / 10
+        </div>
+</div>
+</div>
+</div>
+<script src="../navigation.js"></script>
+</body>
+</html>

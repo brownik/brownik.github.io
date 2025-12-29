@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Slide 3 - Git Commands as Metaphors</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Noto+Sans+KR:wght@300;400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #0F172A; /* Slate 900 */
+            color: #fff;
+            overflow: hidden;
+        }
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(30, 41, 59, 0.8) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(15, 23, 42, 1) 0%, transparent 40%);
+        }
+        
+        /* Card Styles */
+        .metaphor-card {
+            background: rgba(30, 41, 59, 0.4);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .icon-wrapper {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 10;
+        }
+        
+        /* Specific Card Themes */
+        .theme-commit { border-top: 4px solid #F59E0B; }
+        .theme-commit .icon-wrapper { background: rgba(245, 158, 11, 0.1); color: #F59E0B; }
+        .theme-commit:hover { transform: translateY(-5px); box-shadow: 0 10px 30px -10px rgba(245, 158, 11, 0.3); }
+        
+        .theme-push { border-top: 4px solid #EF4444; }
+        .theme-push .icon-wrapper { background: rgba(239, 68, 68, 0.1); color: #EF4444; }
+        .theme-push:hover { transform: translateY(-5px); box-shadow: 0 10px 30px -10px rgba(239, 68, 68, 0.3); }
+        
+        .theme-fetch { border-top: 4px solid #10B981; }
+        .theme-fetch .icon-wrapper { background: rgba(16, 185, 129, 0.1); color: #10B981; }
+        .theme-fetch:hover { transform: translateY(-5px); box-shadow: 0 10px 30px -10px rgba(16, 185, 129, 0.3); }
+        
+        .theme-pull { border-top: 4px solid #8B5CF6; }
+        .theme-pull .icon-wrapper { background: rgba(139, 92, 246, 0.1); color: #8B5CF6; }
+        .theme-pull:hover { transform: translateY(-5px); box-shadow: 0 10px 30px -10px rgba(139, 92, 246, 0.3); }
+
+        .arrow-connector {
+            position: absolute;
+            top: 40%;
+            right: -20px;
+            z-index: 20;
+            color: #475569;
+            font-size: 1.5rem;
+        }
+        
+        /* Decorative background graphics */
+        .bg-grid {
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 0;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+<div class="slide-container font-sans">
+<div class="bg-grid"></div>
+<!-- Header -->
+<div class="relative z-10 px-12 pt-12 pb-6">
+<div class="flex items-center space-x-4 mb-2">
+<span class="px-3 py-1 bg-blue-900 bg-opacity-50 text-blue-300 text-xs font-mono rounded border border-blue-800">CONCEPT</span>
+</div>
+<h1 class="text-4xl font-bold tracking-tight text-white mb-2">
+                Git 명령어, <span class="text-blue-400">비유</span>로 이해하면 쉽습니다
+            </h1>
+<p class="text-gray-400 text-lg font-light">
+                복잡한 기술 용어 대신, 우리에게 익숙한 행동으로 바꿔서 생각해볼까요?
+            </p>
+</div>
+<!-- Main Content Area -->
+<div class="flex-1 relative z-10 px-12 pb-12 flex items-center justify-center">
+<div class="grid grid-cols-4 gap-6 w-full max-w-7xl h-96">
+<!-- Card 1: Commit -->
+<div class="metaphor-card theme-commit rounded-xl p-6 flex flex-col items-center text-center">
+<div class="absolute top-4 right-4 text-xs font-mono text-amber-500 opacity-50">Local</div>
+<div class="icon-wrapper">
+<i class="fas fa-sticky-note text-4xl"></i>
+</div>
+<h3 class="text-2xl font-bold text-amber-500 font-mono mb-2">Commit</h3>
+<p class="text-white font-bold text-lg mb-3">비공개 메모장</p>
+<p class="text-gray-400 text-sm leading-relaxed">
+                        내 PC(작업실)에만 저장되는<br/>나만의 기록입니다.<br/>
+<span class="text-amber-500 text-xs mt-2 block">남들은 아직 볼 수 없어요.</span>
+</p>
+<!-- Connector -->
+<div class="arrow-connector transform translate-x-10">
+<i class="fas fa-chevron-right"></i>
+</div>
+</div>
+<!-- Card 2: Push -->
+<div class="metaphor-card theme-push rounded-xl p-6 flex flex-col items-center text-center">
+<div class="absolute top-4 right-4 text-xs font-mono text-red-500 opacity-50">Upload</div>
+<div class="icon-wrapper">
+<i class="fas fa-bullhorn text-4xl"></i>
+</div>
+<h3 class="text-2xl font-bold text-red-500 font-mono mb-2">Push</h3>
+<p class="text-white font-bold text-lg mb-3">게시판 등록</p>
+<p class="text-gray-400 text-sm leading-relaxed">
+                        메모한 내용을<br/>팀 공용 게시판에 붙입니다.<br/>
+<span class="text-red-400 text-xs mt-2 block">이제 모두가 내 코드를 봅니다.</span>
+</p>
+</div>
+<!-- Divider / Gap for Incoming -->
+<div class="flex items-center justify-center relative">
+<div class="absolute h-full w-px bg-gradient-to-b from-transparent via-gray-700 to-transparent left-1/2"></div>
+<div class="bg-gray-800 text-gray-400 px-4 py-2 rounded-full text-sm font-mono z-10 border border-gray-700">
+                        Incoming <i class="fas fa-download ml-2"></i>
+</div>
+</div>
+<!-- Card Group: Fetch & Pull -->
+<div class="flex flex-col gap-4 h-full">
+<!-- Fetch -->
+<div class="metaphor-card theme-fetch rounded-xl p-5 flex items-center flex-1">
+<div class="mr-5">
+<div class="w-14 h-14 rounded-full bg-green-900 bg-opacity-30 flex items-center justify-center text-green-500">
+<i class="fas fa-search text-xl"></i>
+</div>
+</div>
+<div>
+<div class="flex items-center mb-1">
+<h3 class="text-xl font-bold text-green-500 font-mono mr-2">Fetch</h3>
+<span class="text-xs bg-green-900 text-green-300 px-2 py-0.5 rounded">Safe</span>
+</div>
+<p class="text-white font-bold mb-1">눈팅하기</p>
+<p class="text-gray-400 text-xs">게시판의 변경사항을<br/>확인만 합니다. (반영 X)</p>
+</div>
+</div>
+<!-- Pull -->
+<div class="metaphor-card theme-pull rounded-xl p-5 flex items-center flex-1">
+<div class="mr-5">
+<div class="w-14 h-14 rounded-full bg-purple-900 bg-opacity-30 flex items-center justify-center text-purple-500">
+<i class="fas fa-magnet text-xl"></i>
+</div>
+</div>
+<div>
+<div class="flex items-center mb-1">
+<h3 class="text-xl font-bold text-purple-500 font-mono mr-2">Pull</h3>
+<span class="text-xs bg-purple-900 text-purple-300 px-2 py-0.5 rounded">Caution</span>
+</div>
+<p class="text-white font-bold mb-1">자동 병합</p>
+<p class="text-gray-400 text-xs">남의 코드를 내 노트에<br/>바로 합칩니다. (충돌 위험)</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<div class="absolute bottom-6 w-full px-12 flex justify-between items-center text-gray-600 font-mono text-sm z-20">
+<div class="flex items-center">
+<i class="fab fa-git-alt text-gray-500 mr-3"></i>
+<span>Git Workflow Strategy</span>
+</div>
+<div>03 / 10</div>
+</div>
+</div>
+<script src="../navigation.js"></script>
+</body>
+</html>

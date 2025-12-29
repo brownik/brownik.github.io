@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Slide 10 - Closing Message</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Noto+Sans+KR:wght@300;400;500;700;900&amp;family=Nanum+Myeongjo:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #0F172A; /* Slate 900 */
+            color: white;
+            font-family: 'Noto Sans KR', sans-serif;
+            overflow: hidden;
+        }
+
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            background-color: #0F172A;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Decorative Background Elements (No Gradients) */
+        .bg-glow {
+            position: absolute;
+            width: 800px;
+            height: 800px;
+            background-color: #1E293B; /* Slate 800 */
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.5;
+            z-index: 0;
+            filter: blur(100px);
+        }
+
+        .warm-accent {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background-color: #F59E0B; /* Amber 500 */
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.05;
+            z-index: 1;
+            filter: blur(80px);
+        }
+
+        /* Orbital Rings */
+        .orbit-ring {
+            position: absolute;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+        }
+        .ring-1 { width: 500px; height: 500px; }
+        .ring-2 { width: 700px; height: 700px; border-color: rgba(245, 158, 11, 0.1); }
+        .ring-3 { width: 900px; height: 900px; border-style: dashed; }
+
+        /* Content Layout */
+        .content-wrapper {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        /* Typography */
+        .pre-title {
+            font-family: 'Montserrat', sans-serif;
+            color: #94A3B8;
+            font-size: 1.25rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            margin-bottom: 24px;
+            display: inline-flex;
+            align-items: center;
+            background-color: rgba(15, 23, 42, 0.5);
+            padding: 8px 20px;
+            border-radius: 100px;
+            border: 1px solid rgba(148, 163, 184, 0.1);
+        }
+
+        .main-message {
+            font-family: 'Nanum Myeongjo', serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.4;
+            color: #F1F5F9;
+            margin-bottom: 40px;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+
+        .highlight-safe {
+            color: #FBBF24; /* Amber 400 */
+            position: relative;
+            z-index: 1;
+        }
+
+        .highlight-safe::after {
+            content: '';
+            position: absolute;
+            bottom: 8px;
+            left: -4px;
+            right: -4px;
+            height: 16px;
+            background-color: rgba(245, 158, 11, 0.2);
+            z-index: -1;
+            transform: rotate(-1deg);
+        }
+
+        .closing-text {
+            font-size: 1.5rem;
+            color: #CBD5E1;
+            font-weight: 300;
+            margin-bottom: 50px;
+        }
+
+        .closing-text strong {
+            font-weight: 700;
+            color: white;
+        }
+
+        /* Visual Collaboration Icons */
+        .collab-visual {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+
+        .visual-node {
+            display: flex;
+            flex-col: column;
+            align-items: center;
+            justify-content: center;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: #1E293B;
+            border: 1px solid #334155;
+            position: relative;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+        }
+
+        .visual-node.center {
+            width: 100px;
+            height: 100px;
+            background-color: #1E293B;
+            border: 2px solid #F59E0B;
+            box-shadow: 0 0 20px rgba(245, 158, 11, 0.2);
+        }
+
+        .connector {
+            height: 2px;
+            width: 60px;
+            background-color: #334155;
+        }
+
+        .visual-icon {
+            font-size: 1.75rem;
+            color: #94A3B8;
+        }
+
+        .center .visual-icon {
+            font-size: 2.5rem;
+            color: #FBBF24;
+        }
+
+        /* Floating particles */
+        .particle {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            opacity: 0.1;
+        }
+
+    </style>
+</head>
+<body>
+<div class="slide-container">
+<!-- Background Elements -->
+<div class="bg-glow"></div>
+<div class="warm-accent"></div>
+<div class="orbit-ring ring-1"></div>
+<div class="orbit-ring ring-2"></div>
+<div class="orbit-ring ring-3"></div>
+<!-- Floating Background Icons -->
+<div class="absolute inset-0 z-0 overflow-hidden opacity-10 pointer-events-none">
+<i class="fas fa-code absolute top-20 left-20 text-4xl"></i>
+<i class="fas fa-git-alt absolute bottom-32 right-32 text-6xl"></i>
+<i class="fas fa-shield-alt absolute top-32 right-40 text-3xl"></i>
+<i class="fas fa-check absolute bottom-20 left-40 text-4xl"></i>
+</div>
+<div class="content-wrapper">
+<!-- Pre-Title -->
+<div class="pre-title">
+<i class="fas fa-heart text-red-400 mr-2"></i>
+<span>PSYCHOLOGICAL SAFETY</span>
+</div>
+<!-- Main Title -->
+<h1 class="main-message">
+<p class="text-3xl font-bold font-sans text-gray-400 mb-6">Git은 실력을 평가하는 도구가 아닙니다</p>
+<p>깃은 우리 모두가 사고 없이<br/>퇴근하기 위한 <span class="highlight-safe">안전장치</span>입니다.</p>
+</h1>
+<!-- Visual Metaphor -->
+<div class="collab-visual">
+<!-- Node 1: Developer -->
+<div class="flex flex-col items-center">
+<div class="visual-node">
+<i class="fas fa-user visual-icon"></i>
+</div>
+<span class="mt-2 text-xs text-gray-500 font-mono">DEV</span>
+</div>
+<!-- Connector -->
+<div class="connector"></div>
+<!-- Node 2: Trust (Center) -->
+<div class="flex flex-col items-center">
+<div class="visual-node center">
+<i class="fas fa-handshake visual-icon"></i>
+</div>
+<span class="mt-2 text-xs text-amber-500 font-mono font-bold">TRUST</span>
+</div>
+<!-- Connector -->
+<div class="connector"></div>
+<!-- Node 3: Team -->
+<div class="flex flex-col items-center">
+<div class="visual-node">
+<i class="fas fa-users visual-icon"></i>
+</div>
+<span class="mt-2 text-xs text-gray-500 font-mono">TEAM</span>
+</div>
+</div>
+<!-- Closing Text -->
+<div class="closing-text mt-10">
+<p>이제 동료를 믿고, 당당하게 <span class="font-mono bg-gray-800 px-2 py-1 rounded text-blue-300 text-base mx-1">push</span> 하세요!</p>
+<p class="text-lg mt-4 text-gray-400">감사합니다.</p>
+</div>
+</div>
+<!-- Footer -->
+<div class="absolute bottom-6 w-full px-12 flex justify-between items-center text-gray-600 font-mono text-sm z-30">
+<div class="flex items-center">
+<i class="fab fa-git-alt text-gray-500 mr-3"></i>
+<span>Git Workflow Strategy</span>
+</div>
+<div>10 / 10</div>
+</div>
+</div>
+<script src="../navigation.js"></script>
+</body>
+</html>

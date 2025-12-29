@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Slide 7 - Target Branch Structure</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Noto+Sans+KR:wght@300;400;500;700&amp;family=Fira+Code:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: #0F172A; /* Slate 900 */
+        color: #fff;
+        overflow: hidden;
+        font-family: 'Noto Sans KR', sans-serif;
+    }
+    
+    .slide-container {
+        width: 1280px;
+        height: 720px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        background-color: #0F172A;
+    }
+
+    /* Subtle grid background */
+    .bg-grid {
+        position: absolute;
+        inset: 0;
+        background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        background-size: 50px 50px;
+        z-index: 0;
+    }
+
+    /* Branch Lane Styles */
+    .branch-lane {
+        position: relative;
+        height: 120px;
+        display: flex;
+        align-items: center;
+        padding-left: 200px; /* Space for labels */
+        border-bottom: 1px dashed rgba(255,255,255,0.05);
+    }
+    
+    .branch-lane:last-child {
+        border-bottom: none;
+    }
+
+    /* Branch Labels (Left Side) */
+    .lane-label {
+        position: absolute;
+        left: 40px;
+        width: 160px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .label-badge {
+        display: inline-block;
+        padding: 4px 12px;
+        border-radius: 4px;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 700;
+        font-size: 1rem;
+        margin-bottom: 4px;
+        text-align: center;
+        width: fit-content;
+    }
+
+    .label-desc {
+        font-size: 0.75rem;
+        color: #94A3B8;
+        line-height: 1.4;
+    }
+
+    /* SVG Diagram Overlay */
+    .diagram-svg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 10;
+        pointer-events: none;
+    }
+
+    /* Node Styles (HTML overlay on SVG points) */
+    .node {
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        border: 3px solid #0F172A;
+        transform: translate(-50%, -50%);
+        z-index: 20;
+        box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+
+    .node-tag {
+        position: absolute;
+        transform: translate(-50%, -150%);
+        background: #1E293B;
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-family: 'Fira Code', monospace;
+        font-size: 0.75rem;
+        white-space: nowrap;
+        border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    /* Specific Branch Colors */
+    .color-main { color: #EF4444; border-color: #EF4444; background: #EF4444; }
+    .color-master { color: #3B82F6; border-color: #3B82F6; background: #3B82F6; }
+    .color-feature { color: #94A3B8; border-color: #94A3B8; background: #94A3B8; }
+
+    /* Branch Lines in SVG */
+    .line-path {
+        fill: none;
+        stroke-width: 4;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+
+    .line-dashed {
+        stroke-dasharray: 8, 6;
+        animation: dash 30s linear infinite;
+    }
+
+    @keyframes dash {
+        to {
+            stroke-dashoffset: -1000;
+        }
+    }
+
+    .glow-main { filter: drop-shadow(0 0 4px rgba(239, 68, 68, 0.5)); }
+    .glow-master { filter: drop-shadow(0 0 4px rgba(59, 130, 246, 0.5)); }
+    .glow-feature { filter: drop-shadow(0 0 4px rgba(148, 163, 184, 0.5)); }
+
+    /* Action Labels */
+    .action-label {
+        position: absolute;
+        background: rgba(15, 23, 42, 0.8);
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 0.75rem;
+        color: #fff;
+        z-index: 25;
+        border: 1px solid rgba(255,255,255,0.1);
+        backdrop-filter: blur(4px);
+    }
+
+</style>
+</head>
+<body>
+<div class="slide-container">
+<div class="bg-grid"></div>
+<!-- Header -->
+<div class="relative z-10 px-12 pt-10 pb-2">
+<div class="flex items-center space-x-3 mb-2">
+<span class="px-3 py-1 bg-purple-900 text-purple-300 text-xs font-mono rounded border border-purple-700">STRUCTURE</span>
+</div>
+<h1 class="text-4xl font-bold tracking-tight text-white mb-2">
+            우리가 사용할 <span class="text-blue-400">최소 브랜치</span> 구조
+        </h1>
+<p class="text-gray-400 text-lg font-light">
+            복잡한 흐름은 사고를 유발합니다. 우리는 딱 3단계만 기억합시다.
+        </p>
+</div>
+<!-- Diagram Container -->
+<div class="flex-1 relative mt-4 mx-12 mb-8 bg-slate-800/30 rounded-xl border border-slate-700 backdrop-blur-sm overflow-hidden">
+<!-- SVG Layer for Lines -->
+<svg class="diagram-svg" preserveaspectratio="xMidYMid meet" viewbox="0 0 1184 450">
+<!-- Definitions for gradients/filters -->
+<defs>
+<marker id="arrow-master" markerheight="10" markerunits="strokeWidth" markerwidth="10" orient="auto" refx="8" refy="3">
+<path d="M0,0 L0,6 L9,3 z" fill="#3B82F6"></path>
+</marker>
+<marker id="arrow-main" markerheight="10" markerunits="strokeWidth" markerwidth="10" orient="auto" refx="8" refy="3">
+<path d="M0,0 L0,6 L9,3 z" fill="#EF4444"></path>
+</marker>
+</defs>
+<!-- 1. Main Branch Line (Top) -->
+<path class="line-path glow-main" d="M 220 80 L 1100 80" stroke="#EF4444" stroke-opacity="0.3"></path>
+<path class="line-path glow-main" d="M 220 80 L 1000 80" stroke="#EF4444"></path>
+<!-- 2. Master Branch Line (Middle) -->
+<path class="line-path glow-master" d="M 220 225 L 1100 225" stroke="#3B82F6" stroke-opacity="0.3"></path>
+<path class="line-path glow-master" d="M 220 225 L 950 225" stroke="#3B82F6"></path>
+<!-- 3. Feature Branch Line (Bottom) -->
+<!-- Creates from Master -->
+<path class="line-path glow-feature line-dashed" d="M 350 225 C 350 225, 380 370, 420 370 L 750 370" stroke="#94A3B8"></path>
+<!-- Merge back to Master -->
+<path class="line-path glow-feature" d="M 750 370 C 800 370, 800 225, 850 225" marker-end="url(#arrow-master)" stroke="#94A3B8"></path>
+<!-- Master Merges to Main -->
+<path class="line-path glow-main" d="M 900 225 C 930 225, 930 80, 960 80" marker-end="url(#arrow-main)" stroke="#EF4444"></path>
+</svg>
+<!-- Lanes Layout -->
+<div class="relative z-20 h-full flex flex-col justify-center py-4">
+<!-- Lane 1: Main -->
+<div class="branch-lane">
+<div class="lane-label">
+<div class="label-badge bg-red-900/50 text-red-400 border border-red-500/30">Main</div>
+<p class="label-desc">고객이 사용하는<br/>최종 배포 버전<br/><span class="text-xs text-red-300">(Production 전용)</span></p>
+</div>
+<!-- Nodes -->
+<div class="node bg-red-500" style="left: 250px; top: 80px;">
+<div class="node-tag text-red-300 border-red-500/30">v1.0.0</div>
+</div>
+<!-- Final Release Node -->
+<div class="node bg-red-500" style="left: 960px; top: 80px; width: 20px; height: 20px; border-width: 4px;">
+<div class="node-tag text-red-100 bg-red-900 border-red-500 font-bold">v1.1.0</div>
+</div>
+</div>
+<!-- Lane 2: Master -->
+<div class="branch-lane">
+<div class="lane-label">
+<div class="label-badge bg-blue-900/50 text-blue-400 border border-blue-500/30">Master</div>
+<p class="label-desc">다음 배포를 위한<br/>통합/검증 공간<br/><span class="text-xs text-blue-300">(Development/Staging)</span></p>
+</div>
+<!-- Start Node -->
+<div class="node bg-blue-500" style="left: 250px; top: 225px;"></div>
+<div class="node bg-blue-500" style="left: 350px; top: 225px;"></div>
+<!-- Merge Node -->
+<div class="node bg-blue-500" style="left: 850px; top: 225px; width: 18px; height: 18px;">
+<div class="action-label" style="top: -40px; left: -20px;">
+<i class="fas fa-code-branch mr-1"></i>Merge
+                    </div>
+</div>
+<!-- Release Prep Node -->
+<div class="node bg-blue-500" style="left: 900px; top: 225px;"></div>
+</div>
+<!-- Lane 3: Feature -->
+<div class="branch-lane">
+<div class="lane-label">
+<div class="label-badge bg-slate-700/50 text-slate-300 border border-slate-500/30">Feature</div>
+<p class="label-desc">이슈 해결을 위한<br/>임시 작업실</p>
+</div>
+<!-- Branch Out Action -->
+<div class="action-label bg-slate-800 text-slate-300 border-slate-600" style="left: 350px; top: 280px;">
+<i class="fas fa-plus mr-1"></i>New Branch
+                </div>
+<!-- Feature Commits -->
+<div class="node bg-slate-400" style="left: 480px; top: 370px;">
+<div class="node-tag text-slate-400 border-slate-600">commit</div>
+</div>
+<div class="node bg-slate-400" style="left: 580px; top: 370px;">
+<div class="node-tag text-slate-400 border-slate-600">commit</div>
+</div>
+<div class="node bg-slate-400" style="left: 680px; top: 370px;">
+<div class="node-tag text-slate-400 border-slate-600">commit</div>
+</div>
+<!-- MR Request Label -->
+<div class="action-label bg-purple-900/80 text-purple-200 border-purple-500/50" style="left: 720px; top: 300px;">
+<i class="fas fa-file-signature mr-1"></i>MR / PR Open
+                </div>
+</div>
+</div>
+</div>
+<!-- Legend / Footer -->
+<div class="absolute bottom-6 w-full px-12 flex justify-between items-center text-gray-500 font-mono text-sm z-30">
+<div class="flex items-center space-x-6">
+<div class="flex items-center">
+<div class="w-3 h-3 bg-red-500 rounded-full mr-2"></div>
+<span>Production (Tag)</span>
+</div>
+<div class="flex items-center">
+<div class="w-3 h-3 bg-blue-500 rounded-full mr-2"></div>
+<span>Integration</span>
+</div>
+<div class="flex items-center">
+<div class="w-3 h-3 bg-slate-400 rounded-full mr-2"></div>
+<span>Development</span>
+</div>
+</div>
+<div>
+<i class="fab fa-git-alt mr-2"></i> Git Workflow Strategy <span class="mx-2">|</span> 07 / 10
+        </div>
+</div>
+</div>
+<script src="../navigation.js"></script>
+</body>
+</html>

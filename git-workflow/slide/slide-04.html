@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Slide 4 - The Power of MR/PR</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Noto+Sans+KR:wght@300;400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #0F172A; /* Slate 900 */
+      color: #fff;
+      overflow: hidden;
+    }
+    .slide-container {
+      width: 1280px;
+      height: 720px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      background-color: #0F172A;
+    }
+    
+    /* Background Pattern */
+    .bg-dots {
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(#334155 1px, transparent 1px);
+      background-size: 30px 30px;
+      opacity: 0.3;
+      z-index: 0;
+    }
+
+    /* Flow Pipe Styles */
+    .flow-pipe {
+      position: absolute;
+      top: 50%;
+      left: 10%;
+      right: 10%;
+      height: 6px;
+      background: #1E293B;
+      transform: translateY(-50%);
+      z-index: 1;
+      border-radius: 10px;
+    }
+    
+    .flow-progress {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 45%; /* Up to checkpoint */
+      background: linear-gradient(90deg, #F59E0B, #3B82F6);
+      border-radius: 10px;
+    }
+
+    /* Node Styles */
+    .node-card {
+      background: #1E293B;
+      border: 1px solid #334155;
+      border-radius: 1rem;
+      padding: 1.5rem;
+      position: relative;
+      z-index: 10;
+      transition: transform 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Central Checkpoint Special Styles */
+    .checkpoint-card {
+      background: #1e3a8a; /* Dark Blue */
+      border: 2px solid #3B82F6;
+      transform: scale(1.1);
+      box-shadow: 0 0 40px -10px rgba(59, 130, 246, 0.5);
+    }
+    
+    .checkpoint-badge {
+      position: absolute;
+      top: -15px;
+      background: #3B82F6;
+      color: white;
+      padding: 4px 16px;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      font-family: 'Montserrat', sans-serif;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    }
+
+    .pulse-glow {
+      animation: pulse-border 2s infinite;
+    }
+    
+    @keyframes pulse-border {
+      0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
+      70% { box-shadow: 0 0 0 15px rgba(59, 130, 246, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+    }
+
+    /* Connection Arrows */
+    .arrow-flow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #64748B;
+      font-size: 2rem;
+      z-index: 5;
+    }
+
+    .icon-box {
+      width: 64px;
+      height: 64px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.75rem;
+      margin-bottom: 1rem;
+    }
+
+  </style>
+</head>
+<body>
+<div class="slide-container">
+<div class="bg-dots"></div>
+<!-- Header -->
+<div class="relative z-20 px-12 pt-10 pb-4">
+<div class="flex items-center space-x-3 mb-2">
+<span class="px-3 py-1 bg-indigo-900 text-indigo-300 text-xs font-mono rounded border border-indigo-700">WORKFLOW</span>
+</div>
+<h1 class="text-4xl font-bold tracking-tight text-white">
+        Push는 <span class="text-gray-400 font-light italic mx-1">자유</span>지만, 
+        Merge는 <span class="text-blue-400 mx-1">권한</span>입니다
+      </h1>
+<p class="text-gray-400 mt-2 text-lg font-light">
+        코드가 합쳐지기 전, 우리는 무엇을 확인해야 할까요?
+      </p>
+</div>
+<!-- Main Visualization Area -->
+<div class="flex-1 relative z-10 flex items-center justify-center w-full px-16">
+<!-- Background Pipe connecting nodes -->
+<div class="flow-pipe">
+<div class="flow-progress"></div>
+</div>
+<!-- Grid for positioning nodes -->
+<div class="grid grid-cols-3 gap-8 w-full max-w-6xl items-center relative">
+<!-- Arrow Indicators -->
+<div class="arrow-flow" style="left: 31%;"><i class="fas fa-angle-right animate-pulse"></i></div>
+<div class="arrow-flow" style="left: 65%; color: #3B82F6;"><i class="fas fa-angle-double-right"></i></div>
+<!-- Node 1: Feature / Push (Left) -->
+<div class="node-card border-amber-500/30">
+<div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-gray-800 text-amber-500 text-xs font-mono px-2 py-1 rounded border border-amber-500/50">
+            Local Work
+          </div>
+<div class="icon-box bg-amber-900/30 text-amber-500 border border-amber-500/20">
+<i class="fas fa-code-branch"></i>
+</div>
+<h3 class="text-xl font-bold text-amber-500 mb-2">Feature Branch</h3>
+<div class="text-gray-300 text-sm space-y-1">
+<p class="font-semibold text-white">Action: Push</p>
+<p class="text-xs text-gray-400">개인 작업실에 물건 두기</p>
+<p class="text-xs text-gray-500 italic mt-2">"자유로운 실험 공간"</p>
+</div>
+</div>
+<!-- Node 2: MR/PR Checkpoint (Center - Hero) -->
+<div class="node-card checkpoint-card pulse-glow">
+<div class="checkpoint-badge">
+<i class="fas fa-shield-alt mr-2"></i> CHECK POINT
+          </div>
+<div class="icon-box bg-blue-500 text-white shadow-lg mt-2">
+<i class="fas fa-tasks"></i>
+</div>
+<h3 class="text-2xl font-bold text-white mb-2">MR / PR</h3>
+<div class="text-blue-100 text-sm space-y-2 mb-2">
+<p class="font-bold border-b border-blue-400 pb-1 mb-2">"이 코드, 합쳐도 될까요?"</p>
+<div class="flex flex-col gap-1 text-left text-xs bg-blue-900/50 p-3 rounded">
+<p><i class="fas fa-check text-blue-300 w-4"></i> 동료의 코드 리뷰</p>
+<p><i class="fas fa-check text-blue-300 w-4"></i> 자동화 테스트(CI) 통과</p>
+<p><i class="fas fa-check text-blue-300 w-4"></i> 충돌(Conflict) 해결</p>
+</div>
+</div>
+</div>
+<!-- Node 3: Master / Merge (Right) -->
+<div class="node-card border-green-500/30">
+<div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-gray-800 text-green-500 text-xs font-mono px-2 py-1 rounded border border-green-500/50">
+            Production Ready
+          </div>
+<div class="icon-box bg-green-900/30 text-green-500 border border-green-500/20">
+<i class="fas fa-server"></i>
+</div>
+<h3 class="text-xl font-bold text-green-500 mb-2">Master Branch</h3>
+<div class="text-gray-300 text-sm space-y-1">
+<p class="font-semibold text-white">Action: Merge</p>
+<p class="text-xs text-gray-400">검증된 코드만 합류</p>
+<p class="text-xs text-gray-500 italic mt-2">"안정성 100% 보장"</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Key Message -->
+<div class="relative z-20 w-full flex justify-center pb-10">
+<div class="bg-gray-800/80 backdrop-blur-md border border-gray-600 rounded-xl px-8 py-5 flex items-center shadow-2xl max-w-3xl">
+<div class="bg-blue-500/20 p-3 rounded-full mr-5 text-blue-400">
+<i class="fas fa-lightbulb text-2xl"></i>
+</div>
+<div>
+<p class="text-xl font-medium text-white">
+            "MR/PR은 단순한 요청이 아니라,<br/>
+<span class="text-blue-400 font-bold">코드의 품질을 보장하는 최후의 보루</span>입니다."
+          </p>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<div class="absolute bottom-6 w-full px-12 flex justify-between items-center text-gray-600 font-mono text-sm z-30">
+<div class="flex items-center">
+<i class="fab fa-git-alt text-gray-500 mr-3"></i>
+<span>Git Workflow Strategy</span>
+</div>
+<div>04 / 10</div>
+</div>
+</div>
+<script src="../navigation.js"></script>
+</body>
+</html>

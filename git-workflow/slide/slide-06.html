@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Slide 6 - Benefits of Strategy</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Noto+Sans+KR:wght@300;400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #0F172A; /* Slate 900 */
+            color: #fff;
+            overflow: hidden;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+        
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            background-color: #0F172A;
+            /* Subtle dotted background pattern */
+            background-image: radial-gradient(#334155 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+
+        /* Card Container Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            width: 100%;
+            max-width: 1150px;
+            margin: 0 auto;
+            height: 400px;
+        }
+
+        /* Individual Card Styles */
+        .benefit-card {
+            background: #1E293B; /* Slate 800 */
+            border: 1px solid #334155;
+            border-radius: 16px;
+            padding: 2rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            overflow: hidden;
+        }
+        
+        /* Top accent line */
+        .benefit-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+            background: #273549; /* Slightly lighter slate */
+        }
+
+        /* Card Specific Colors */
+        .card-blue::before { background-color: #3B82F6; }
+        .card-amber::before { background-color: #F59E0B; }
+        .card-red::before { background-color: #EF4444; }
+        .card-green::before { background-color: #10B981; }
+
+        .icon-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .card-blue .icon-circle { background: rgba(59, 130, 246, 0.15); color: #60A5FA; box-shadow: 0 0 20px rgba(59, 130, 246, 0.2); }
+        .card-amber .icon-circle { background: rgba(245, 158, 11, 0.15); color: #FBBF24; box-shadow: 0 0 20px rgba(245, 158, 11, 0.2); }
+        .card-red .icon-circle { background: rgba(239, 68, 68, 0.15); color: #F87171; box-shadow: 0 0 20px rgba(239, 68, 68, 0.2); }
+        .card-green .icon-circle { background: rgba(16, 185, 129, 0.15); color: #34D399; box-shadow: 0 0 20px rgba(16, 185, 129, 0.2); }
+
+        /* Number Badge */
+        .number-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 3rem;
+            opacity: 0.05;
+            line-height: 1;
+        }
+
+        /* Key Message Box */
+        .message-box {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid #475569;
+            backdrop-filter: blur(8px);
+            border-radius: 12px;
+            padding: 1.25rem 3rem;
+            position: relative;
+            z-index: 20;
+        }
+        
+        .message-box::before, .message-box::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border: 2px solid #64748B;
+            transition: all 0.3s ease;
+        }
+        
+        .message-box::before { top: -2px; left: -2px; border-right: none; border-bottom: none; border-radius: 12px 0 0 0; }
+        .message-box::after { bottom: -2px; right: -2px; border-left: none; border-top: none; border-radius: 0 0 12px 0; }
+
+    </style>
+</head>
+<body>
+<div class="slide-container">
+<!-- Header -->
+<div class="relative z-10 px-12 pt-10 pb-4">
+<div class="flex items-center space-x-3 mb-2">
+<span class="px-3 py-1 bg-blue-900 text-blue-300 text-xs font-mono rounded border border-blue-700">BENEFITS</span>
+</div>
+<h1 class="text-4xl font-bold tracking-tight text-white mb-2">
+<span class="text-blue-400 font-mono">1 Issue 1 Branch</span>가 우리를 지켜주는 이유
+            </h1>
+<p class="text-gray-400 text-lg font-light">
+                규칙을 지키면, 개발은 더 빠르고 안전해집니다.
+            </p>
+</div>
+<!-- Main Content Grid -->
+<div class="flex-1 flex flex-col justify-center items-center relative z-10 -mt-4">
+<div class="cards-grid">
+<!-- Card 1: Independence (Blue) -->
+<div class="benefit-card card-blue">
+<div class="number-badge">01</div>
+<div class="icon-circle">
+<i class="fas fa-cube"></i>
+</div>
+<h3 class="text-xl font-bold text-white mb-3">작업 독립성</h3>
+<div class="w-12 h-1 bg-blue-500 rounded mb-4"></div>
+<p class="text-gray-300 text-sm leading-relaxed">
+                        내 작업이 다른 사람의 코드와<br/>전혀 섞이지 않습니다.<br/>
+<span class="text-blue-400 text-xs mt-2 block font-medium">Side Effect 최소화</span>
+</p>
+</div>
+<!-- Card 2: Traceability (Amber) -->
+<div class="benefit-card card-amber">
+<div class="number-badge">02</div>
+<div class="icon-circle">
+<i class="fas fa-search-location"></i>
+</div>
+<h3 class="text-xl font-bold text-white mb-3">추적 가능성</h3>
+<div class="w-12 h-1 bg-amber-500 rounded mb-4"></div>
+<p class="text-gray-300 text-sm leading-relaxed">
+                        "왜 이렇게 고쳤지?"<br/>이슈 번호 하나로<br/>기획 의도를 1초 만에 확인합니다.
+                    </p>
+</div>
+<!-- Card 3: Safe Rollback (Red) -->
+<div class="benefit-card card-red">
+<div class="number-badge">03</div>
+<div class="icon-circle">
+<i class="fas fa-shield-alt"></i>
+</div>
+<h3 class="text-xl font-bold text-white mb-3">안전한 롤백</h3>
+<div class="w-12 h-1 bg-red-500 rounded mb-4"></div>
+<p class="text-gray-300 text-sm leading-relaxed">
+                        문제가 발생해도<br/>해당 브랜치만 되돌리면<br/>다른 기능은 안전합니다.
+                    </p>
+</div>
+<!-- Card 4: Efficient Review (Green) -->
+<div class="benefit-card card-green">
+<div class="number-badge">04</div>
+<div class="icon-circle">
+<i class="fas fa-glasses"></i>
+</div>
+<h3 class="text-xl font-bold text-white mb-3">효율적 리뷰</h3>
+<div class="w-12 h-1 bg-green-500 rounded mb-4"></div>
+<p class="text-gray-300 text-sm leading-relaxed">
+                        변경 범위가 작고 명확해져<br/>코드 리뷰 속도가<br/>획기적으로 빨라집니다.
+                    </p>
+</div>
+</div>
+<!-- Key Message -->
+<div class="mt-10">
+<div class="message-box">
+<p class="text-2xl font-light text-center text-white">
+<i class="fas fa-quote-left text-gray-600 mr-3 text-lg align-top"></i>
+                        작업의 단위를 <span class="text-blue-400 font-bold">작게 쪼갤수록</span> 사고는 줄어듭니다.
+                        <i class="fas fa-quote-right text-gray-600 ml-3 text-lg align-bottom"></i>
+</p>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<div class="absolute bottom-6 w-full px-12 flex justify-between items-center text-gray-600 font-mono text-sm z-30">
+<div class="flex items-center">
+<i class="fab fa-git-alt text-gray-500 mr-3"></i>
+<span>Git Workflow Strategy</span>
+</div>
+<div>06 / 10</div>
+</div>
+</div>
+<script src="../navigation.js"></script>
+</body>
+</html>

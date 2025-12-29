@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Slide 9 - Minimum Rules</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Noto+Sans+KR:wght@300;400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #0F172A; /* Slate 900 */
+            color: white;
+            font-family: 'Noto Sans KR', sans-serif;
+            overflow: hidden;
+        }
+
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            background-color: #0F172A;
+        }
+
+        /* Subtle background pattern using SVG */
+        .bg-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.1;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        /* Rule Card Styles */
+        .rules-container {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            max-width: 1000px;
+            margin: 0 auto;
+            width: 100%;
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .rule-card {
+            background-color: #1E293B; /* Slate 800 */
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 0;
+            height: 84px;
+            display: flex;
+            align-items: center;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .rule-card:hover {
+            transform: translateX(10px);
+            background-color: #263346;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+            border-color: #475569;
+        }
+
+        /* Left Indicator Bar */
+        .indicator-bar {
+            width: 6px;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        /* Number/Icon Section */
+        .icon-section {
+            width: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            color: #94A3B8;
+            margin-left: 6px; /* Offset for bar */
+        }
+
+        /* Content Section */
+        .content-section {
+            flex: 1;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .rule-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #F1F5F9;
+            margin-bottom: 2px;
+        }
+
+        .rule-desc {
+            font-size: 0.85rem;
+            color: #94A3B8;
+        }
+
+        /* Checkbox Section */
+        .check-section {
+            width: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-left: 1px dashed #334155;
+            height: 60%;
+        }
+
+        .check-circle {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: rgba(16, 185, 129, 0.1);
+            border: 2px solid #10B981;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #10B981;
+            font-size: 0.9rem;
+        }
+
+        /* Specific Colors */
+        .rule-1 .indicator-bar { background-color: #3B82F6; } /* Blue */
+        .rule-1 .icon-section { color: #60A5FA; }
+        
+        .rule-2 .indicator-bar { background-color: #EF4444; } /* Red */
+        .rule-2 .icon-section { color: #F87171; }
+
+        .rule-3 .indicator-bar { background-color: #F59E0B; } /* Amber */
+        .rule-3 .icon-section { color: #FBBF24; }
+
+        .rule-4 .indicator-bar { background-color: #10B981; } /* Green */
+        .rule-4 .icon-section { color: #34D399; }
+
+        .rule-5 .indicator-bar { background-color: #8B5CF6; } /* Purple */
+        .rule-5 .icon-section { color: #A78BFA; }
+
+        /* Highlight keywords */
+        .highlight-blue { color: #60A5FA; }
+        .highlight-red { color: #F87171; }
+        .highlight-amber { color: #FBBF24; }
+        .highlight-green { color: #34D399; }
+        .highlight-purple { color: #A78BFA; }
+
+    </style>
+</head>
+<body>
+<div class="slide-container">
+<!-- Background Pattern -->
+<div class="bg-pattern"></div>
+<!-- Header -->
+<div class="relative z-10 px-12 pt-10 pb-6">
+<div class="flex items-center space-x-3 mb-2">
+<span class="px-3 py-1 bg-gray-800 text-gray-300 text-xs font-mono rounded border border-gray-600">CHECKLIST</span>
+</div>
+<h1 class="text-4xl font-bold tracking-tight text-white mb-2">
+                우리가 지킬 <span class="text-blue-400">최소한의 규칙</span> 5가지
+            </h1>
+<p class="text-gray-400 text-lg font-light">
+                복잡한 컨벤션보다 중요한 것은, 반드시 지킬 수 있는 약속입니다.
+            </p>
+</div>
+<!-- Main Content (Rules List) -->
+<div class="flex-1 flex flex-col items-center justify-start pt-2">
+<div class="rules-container">
+<!-- Rule 1 -->
+<div class="rule-card rule-1">
+<div class="indicator-bar"></div>
+<div class="icon-section">
+<i class="fas fa-ticket-alt"></i>
+</div>
+<div class="content-section">
+<div class="rule-title">
+                            모든 작업은 <span class="highlight-blue">이슈 생성</span>부터 시작한다
+                        </div>
+<div class="rule-desc">
+                            "티켓 없는 작업은 존재하지 않는다." 작업의 근거를 먼저 만드세요.
+                        </div>
+</div>
+<div class="check-section">
+<div class="check-circle"><i class="fas fa-check"></i></div>
+</div>
+</div>
+<!-- Rule 2 -->
+<div class="rule-card rule-2">
+<div class="indicator-bar"></div>
+<div class="icon-section">
+<i class="fas fa-ban"></i>
+</div>
+<div class="content-section">
+<div class="rule-title">
+                            Master/Main 브랜치에 <span class="highlight-red">직접 Push 금지</span>
+</div>
+<div class="rule-desc">
+                            운영 환경 보호를 위해 로컬에서 직접 업로드하는 것을 원천 차단합니다.
+                        </div>
+</div>
+<div class="check-section">
+<div class="check-circle"><i class="fas fa-check"></i></div>
+</div>
+</div>
+<!-- Rule 3 -->
+<div class="rule-card rule-3">
+<div class="indicator-bar"></div>
+<div class="icon-section">
+<i class="fas fa-hashtag"></i>
+</div>
+<div class="content-section">
+<div class="rule-title">
+                            브랜치명은 <span class="highlight-amber">이슈 번호</span>를 포함한다
+                        </div>
+<div class="rule-desc">
+                            <span class="text-green-400">✓</span> feature/102-login<br/>
+                            <span class="text-red-400">✗</span> feature/login, update-api (이슈 번호 없음)
+                        </div>
+</div>
+<div class="check-section">
+<div class="check-circle"><i class="fas fa-check"></i></div>
+</div>
+</div>
+<!-- Rule 4 -->
+<div class="rule-card rule-4">
+<div class="indicator-bar"></div>
+<div class="icon-section">
+<i class="fas fa-user-friends"></i>
+</div>
+<div class="content-section">
+<div class="rule-title">
+                            Merge 전에는 반드시 <span class="highlight-green">동료의 리뷰(MR/PR)</span>를 거친다
+                        </div>
+<div class="rule-desc">
+                            최소 1명 이상의 승인이 있어야 코드를 병합할 수 있습니다.
+                        </div>
+</div>
+<div class="check-section">
+<div class="check-circle"><i class="fas fa-check"></i></div>
+</div>
+</div>
+<!-- Rule 5 -->
+<div class="rule-card rule-5">
+<div class="indicator-bar"></div>
+<div class="icon-section">
+<i class="fas fa-wrench"></i>
+</div>
+<div class="content-section">
+<div class="rule-title">
+                            충돌(Conflict)은 <span class="highlight-purple">MR 작성자</span>가 해결한다
+                        </div>
+<div class="rule-desc">
+                            작업 내용을 가장 잘 아는 당사자가 로컬에서 해결 후 다시 Push합니다.
+                        </div>
+</div>
+<div class="check-section">
+<div class="check-circle"><i class="fas fa-check"></i></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<div class="absolute bottom-6 w-full px-12 flex justify-between items-center text-gray-600 font-mono text-sm z-30">
+<div class="flex items-center">
+<i class="fab fa-git-alt text-gray-500 mr-3"></i>
+<span>Git Workflow Strategy</span>
+</div>
+<div>09 / 10</div>
+</div>
+</div>
+<script src="../navigation.js"></script>
+</body>
+</html>

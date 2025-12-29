@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Slide 8 - Comparison: Before vs After</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Noto+Sans+KR:wght@300;400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #0F172A; /* Slate 900 */
+            color: white;
+            font-family: 'Noto Sans KR', sans-serif;
+            overflow: hidden;
+        }
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            background-color: #0F172A;
+        }
+        
+        /* SVG Background Pattern */
+        .svg-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.15;
+            pointer-events: none;
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 10;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 0 60px;
+        }
+
+        /* Custom Grid Layout */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 160px 1fr 60px 1fr; /* Category | Before | Arrow | After */
+            gap: 20px;
+            align-items: stretch;
+        }
+
+        /* Card Styles */
+        .before-cell {
+            background-color: rgba(69, 10, 10, 0.4); /* Red 900/40 */
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            border-radius: 12px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .before-cell:hover {
+            background-color: rgba(69, 10, 10, 0.6);
+            transform: translateX(4px);
+        }
+        
+        .after-cell {
+            background-color: rgba(23, 37, 84, 0.4); /* Blue 950/40 */
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 12px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .after-cell:hover {
+            background-color: rgba(23, 37, 84, 0.7);
+            border-color: rgba(59, 130, 246, 0.6);
+            transform: translateX(-4px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Accent Bars */
+        .bar-red {
+            position: absolute;
+            left: 0;
+            top: 15%;
+            height: 70%;
+            width: 4px;
+            background-color: #EF4444;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .bar-blue {
+            position: absolute;
+            left: 0;
+            top: 15%;
+            height: 70%;
+            width: 4px;
+            background-color: #3B82F6;
+            border-radius: 0 4px 4px 0;
+        }
+
+        /* Icon Overlay */
+        .card-icon {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 2.5rem;
+            opacity: 0.1;
+        }
+
+    </style>
+</head>
+<body>
+<div class="slide-container">
+<!-- SVG Pattern Background (Dot Grid) -->
+<svg class="svg-bg" height="100%" width="100%" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<pattern height="30" id="dot-grid" patternunits="userSpaceOnUse" width="30">
+<circle cx="1.5" cy="1.5" fill="#475569" r="1.5"></circle>
+</pattern>
+</defs>
+<rect fill="url(#dot-grid)" height="100%" width="100%"></rect>
+</svg>
+<div class="content-wrapper">
+<!-- Header -->
+<div class="pt-12 pb-8">
+<div class="flex items-center space-x-3 mb-2">
+<span class="px-3 py-1 bg-gray-800 text-gray-300 text-xs font-mono rounded border border-gray-600">COMPARISON</span>
+</div>
+<h1 class="text-4xl font-bold tracking-tight text-white mb-2">
+                    불안한 <span class="text-red-400">자유</span> vs 안전한 <span class="text-blue-400">규칙</span>
+</h1>
+<p class="text-gray-400 text-lg font-light">
+                    규칙은 통제가 아니라, 우리를 보호하는 안전장치입니다.
+                </p>
+</div>
+<!-- Comparison Table / Grid -->
+<div class="w-full max-w-6xl mx-auto">
+<!-- Table Headers -->
+<div class="comparison-grid mb-4">
+<div class="text-gray-500 font-mono text-xs uppercase tracking-wider self-end pb-2">Category</div>
+<div class="bg-red-900 bg-opacity-20 border border-red-900 border-opacity-50 rounded py-2 text-center">
+<span class="text-red-400 font-bold font-mono text-sm"><i class="fas fa-exclamation-triangle mr-2"></i>Current (AS-IS)</span>
+</div>
+<div></div>
+<div class="bg-blue-900 bg-opacity-20 border border-blue-900 border-opacity-50 rounded py-2 text-center">
+<span class="text-blue-400 font-bold font-mono text-sm"><i class="fas fa-shield-alt mr-2"></i>Proposed (TO-BE)</span>
+</div>
+</div>
+<!-- Row 1: Initiation -->
+<div class="comparison-grid mb-5 group">
+<!-- Category Icon -->
+<div class="flex flex-col justify-center">
+<div class="flex items-center mb-1">
+<div class="w-8 h-8 rounded bg-gray-800 flex items-center justify-center text-gray-400 mr-3">
+<i class="fas fa-play text-sm"></i>
+</div>
+<h3 class="font-bold text-white text-lg">작업 시작</h3>
+</div>
+<p class="text-xs text-gray-500 pl-11">Initiation</p>
+</div>
+<!-- Before Card -->
+<div class="before-cell">
+<div class="bar-red"></div>
+<div class="card-icon text-red-500"><i class="fas fa-bomb"></i></div>
+<h4 class="text-red-200 font-bold text-lg mb-1">바로 Master 작업</h4>
+<p class="text-gray-400 text-sm">운영/개발 브랜치에서<br/>즉시 코드 수정을 시작함</p>
+</div>
+<!-- Arrow -->
+<div class="flex items-center justify-center opacity-30 group-hover:opacity-100 transition-opacity">
+<i class="fas fa-chevron-right text-2xl text-gray-500"></i>
+</div>
+<!-- After Card -->
+<div class="after-cell">
+<div class="bar-blue"></div>
+<div class="card-icon text-blue-500"><i class="fas fa-ticket-alt"></i></div>
+<h4 class="text-blue-200 font-bold text-lg mb-1">Issue 확인 후 생성</h4>
+<p class="text-gray-300 text-sm">작업 전 티켓을 확인하고<br/><span class="text-blue-400">feature 브랜치</span>를 생성함</p>
+</div>
+</div>
+<!-- Row 2: Integration -->
+<div class="comparison-grid mb-5 group">
+<!-- Category Icon -->
+<div class="flex flex-col justify-center">
+<div class="flex items-center mb-1">
+<div class="w-8 h-8 rounded bg-gray-800 flex items-center justify-center text-gray-400 mr-3">
+<i class="fas fa-code-branch text-sm"></i>
+</div>
+<h3 class="font-bold text-white text-lg">코드 통합</h3>
+</div>
+<p class="text-xs text-gray-500 pl-11">Integration</p>
+</div>
+<!-- Before Card -->
+<div class="before-cell">
+<div class="bar-red"></div>
+<div class="card-icon text-red-500"><i class="fas fa-unlock"></i></div>
+<h4 class="text-red-200 font-bold text-lg mb-1">누구나 직접 Push</h4>
+<p class="text-gray-400 text-sm">검증 절차 없이 공용<br/>브랜치에 코드를 주입함</p>
+</div>
+<!-- Arrow -->
+<div class="flex items-center justify-center opacity-30 group-hover:opacity-100 transition-opacity">
+<i class="fas fa-chevron-right text-2xl text-gray-500"></i>
+</div>
+<!-- After Card -->
+<div class="after-cell">
+<div class="bar-blue"></div>
+<div class="card-icon text-blue-500"><i class="fas fa-user-check"></i></div>
+<h4 class="text-blue-200 font-bold text-lg mb-1">MR/PR 검토 필수</h4>
+<p class="text-gray-300 text-sm">반드시 동료의 <span class="text-blue-400">리뷰 승인</span>을<br/>거친 후 안전하게 병합</p>
+</div>
+</div>
+<!-- Row 3: Response -->
+<div class="comparison-grid group">
+<!-- Category Icon -->
+<div class="flex flex-col justify-center">
+<div class="flex items-center mb-1">
+<div class="w-8 h-8 rounded bg-gray-800 flex items-center justify-center text-gray-400 mr-3">
+<i class="fas fa-fire-extinguisher text-sm"></i>
+</div>
+<h3 class="font-bold text-white text-lg">사고 대응</h3>
+</div>
+<p class="text-xs text-gray-500 pl-11">Response</p>
+</div>
+<!-- Before Card -->
+<div class="before-cell">
+<div class="bar-red"></div>
+<div class="card-icon text-red-500"><i class="fas fa-search-minus"></i></div>
+<h4 class="text-red-200 font-bold text-lg mb-1">원인 파악 불가</h4>
+<p class="text-gray-400 text-sm">"누가, 왜 고쳤지?"<br/>히스토리 추적에 수시간 소요</p>
+</div>
+<!-- Arrow -->
+<div class="flex items-center justify-center opacity-30 group-hover:opacity-100 transition-opacity">
+<i class="fas fa-chevron-right text-2xl text-gray-500"></i>
+</div>
+<!-- After Card -->
+<div class="after-cell">
+<div class="bar-blue"></div>
+<div class="card-icon text-blue-500"><i class="fas fa-crosshairs"></i></div>
+<h4 class="text-blue-200 font-bold text-lg mb-1">즉시 원인 추적</h4>
+<p class="text-gray-300 text-sm">티켓 번호 하나로 기획서부터<br/>코드까지 <span class="text-blue-400">1초 만에 확인</span></p>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<div class="absolute bottom-6 w-full px-12 flex justify-between items-center text-gray-600 font-mono text-sm left-0">
+<div class="flex items-center">
+<i class="fab fa-git-alt text-gray-500 mr-3"></i>
+<span>Git Workflow Strategy</span>
+</div>
+<div>08 / 10</div>
+</div>
+</div>
+</div>
+<script src="../navigation.js"></script>
+</body>
+</html>

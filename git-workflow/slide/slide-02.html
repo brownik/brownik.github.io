@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Slide 2 - The Real Issue</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&amp;family=Noto+Sans+KR:wght@300;400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #0F172A; /* Slate 900 */
+      color: #fff;
+    }
+    .slide-container {
+      width: 1280px;
+      height: 720px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      font-family: 'Noto Sans KR', sans-serif;
+    }
+    .content-wrapper {
+      flex: 1;
+      display: flex;
+      position: relative;
+      z-index: 10;
+    }
+    /* Split Layout Styles */
+    .left-panel {
+      width: 55%;
+      background-color: #1E293B; /* Slate 800 */
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      padding: 3rem;
+      border-right: 1px solid #334155;
+    }
+    .right-panel {
+      width: 45%;
+      background-color: #0F172A; /* Slate 900 */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 3rem;
+      position: relative;
+    }
+    /* Warning pattern for right panel background */
+    .warning-pattern {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      opacity: 0.05;
+      background-image: repeating-linear-gradient(45deg, #7f1d1d 0, #7f1d1d 1px, transparent 0, transparent 50%);
+      background-size: 20px 20px;
+      z-index: 0;
+    }
+    
+    /* Chaos Canvas */
+    #chaosCanvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.2;
+      pointer-events: none;
+    }
+
+    .list-item {
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: flex-start;
+      background: rgba(15, 23, 42, 0.6);
+      padding: 1rem;
+      border-radius: 0.5rem;
+      border-left: 4px solid #F59E0B; /* Amber 500 */
+      backdrop-filter: blur(4px);
+    }
+
+    .consequence-card {
+      background: rgba(127, 29, 29, 0.2); /* Red 900 / 20% */
+      border: 1px solid rgba(220, 38, 38, 0.3); /* Red 600 */
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      border-radius: 0.75rem;
+      display: flex;
+      align-items: center;
+      transition: transform 0.3s ease;
+    }
+    .consequence-card:hover {
+      transform: translateX(10px);
+      background: rgba(127, 29, 29, 0.3);
+    }
+
+    .key-message {
+      position: absolute;
+      bottom: 2rem;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      padding: 0 2rem;
+    }
+    
+    .divider-icon {
+      position: absolute;
+      left: 55%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 20;
+      background: #0F172A;
+      border: 2px solid #ef4444;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ef4444;
+      box-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
+    }
+</style>
+</head>
+<body>
+<div class="slide-container">
+<!-- Header -->
+<div class="absolute top-0 left-0 w-full p-8 z-30">
+<div class="flex items-center space-x-3">
+<span class="px-3 py-1 bg-gray-700 text-xs font-mono rounded text-gray-300">AS-IS</span>
+<h1 class="text-3xl font-bold tracking-tight">지금 우리의 실제 작업 흐름: <span class="text-gray-400 font-light">규칙 없는 자유</span></h1>
+</div>
+</div>
+<div class="content-wrapper mt-20">
+<!-- Center Divider Icon -->
+<div class="divider-icon">
+<i class="fas fa-arrow-right"></i>
+</div>
+<!-- LEFT: Chaos (Process) -->
+<div class="left-panel">
+<canvas id="chaosCanvas"></canvas>
+<div class="relative z-10 flex flex-col justify-center h-full pl-4">
+<h2 class="text-2xl font-bold text-amber-400 mb-8 flex items-center">
+<i class="fas fa-biohazard mr-3"></i> CHAOS ZONE
+        </h2>
+<div class="space-y-2">
+<div class="list-item">
+<div class="mt-1 mr-4 text-amber-500"><i class="fas fa-code-branch fa-lg"></i></div>
+<div>
+<p class="font-bold text-lg text-gray-100">기준 없는 Branch 관리</p>
+<p class="text-gray-400 text-sm mt-1">Main? Master? Dev? 혼용되는 브랜치 전략</p>
+</div>
+</div>
+<div class="list-item" style="border-left-color: #F97316;">
+<div class="mt-1 mr-4 text-orange-500"><i class="fas fa-upload fa-lg"></i></div>
+<div>
+<p class="font-bold text-lg text-gray-100">직접 Push로 인한 코드 오염</p>
+<p class="text-gray-400 text-sm mt-1">리뷰 없이 운영 서버로 직행하는 불안한 코드</p>
+</div>
+</div>
+<div class="list-item" style="border-left-color: #EF4444;">
+<div class="mt-1 mr-4 text-red-500"><i class="fas fa-user-secret fa-lg"></i></div>
+<div>
+<p class="font-bold text-lg text-gray-100">"누가 수정했지?" 원인 파악 불가</p>
+<p class="text-gray-400 text-sm mt-1">Commit Message: "fix", "update" (의미 없음)</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- RIGHT: Consequence (Result) -->
+<div class="right-panel">
+<div class="warning-pattern"></div>
+<div class="relative z-10 flex flex-col justify-center h-full">
+<h2 class="text-2xl font-bold text-red-500 mb-8 flex items-center justify-end">
+          CONSEQUENCE <i class="fas fa-exclamation-triangle ml-3"></i>
+</h2>
+<div class="consequence-card">
+<div class="text-4xl text-red-500 mr-5 w-12 text-center"><i class="fas fa-server"></i></div>
+<div class="flex-1">
+<p class="text-xl font-bold text-red-100">서비스 장애</p>
+<p class="text-red-300 text-sm">Critical Failure</p>
+</div>
+</div>
+<div class="consequence-card">
+<div class="text-4xl text-red-500 mr-5 w-12 text-center"><i class="fas fa-undo-alt"></i></div>
+<div class="flex-1">
+<p class="text-xl font-bold text-red-100">롤백(Rollback) 불가</p>
+<p class="text-red-300 text-sm">Irreversible State</p>
+</div>
+</div>
+<div class="consequence-card">
+<div class="text-4xl text-red-500 mr-5 w-12 text-center"><i class="fas fa-users-slash"></i></div>
+<div class="flex-1">
+<p class="text-xl font-bold text-red-100">책임 소재 모호</p>
+<p class="text-red-300 text-sm">Blame Game</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Key Message Box -->
+<div class="absolute bottom-12 left-1/2 transform -translate-x-1/2 w-full max-w-3xl z-40">
+<div class="bg-gray-900 border border-gray-600 rounded-xl p-4 shadow-2xl flex items-center justify-center">
+<i class="fas fa-quote-left text-gray-500 mr-4"></i>
+<p class="text-xl text-gray-200 font-medium text-center">
+        규칙 없는 자유는 <span class="text-red-400 font-bold">실수</span>를 <span class="text-red-500 font-extrabold border-b-2 border-red-500">대형 사고</span>로 만듭니다.
+      </p>
+<i class="fas fa-quote-right text-gray-500 ml-4"></i>
+</div>
+</div>
+<!-- Footer -->
+<div class="absolute bottom-4 w-full px-12 flex justify-between items-center text-gray-600 font-mono text-sm z-50">
+<div class="flex items-center">
+<i class="fab fa-git-alt text-gray-500 mr-3"></i>
+<span>Git Workflow Strategy</span>
+</div>
+<div>02 / 10</div>
+</div>
+</div>
+<script>
+  // Draw Chaos Lines
+  const canvas = document.getElementById('chaosCanvas');
+  const ctx = canvas.getContext('2d');
+  
+  // Set canvas size (adjust for container size, simplified for this static render context)
+  canvas.width = 704; // approx 55% of 1280
+  canvas.height = 640; // approx height minus header
+
+  function drawChaos() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    const nodes = [];
+    const nodeCount = 15;
+    
+    // Create random nodes
+    for(let i=0; i<nodeCount; i++) {
+      nodes.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height
+      });
+    }
+    
+    // Draw connecting lines (bezier for tangled look)
+    ctx.lineWidth = 2;
+    
+    for(let i=0; i<nodes.length; i++) {
+      const start = nodes[i];
+      // connect to 2 random other nodes
+      for(let j=0; j<2; j++) {
+        const end = nodes[Math.floor(Math.random() * nodes.length)];
+        
+        const cp1x = start.x + (Math.random() - 0.5) * 200;
+        const cp1y = start.y + (Math.random() - 0.5) * 200;
+        const cp2x = end.x + (Math.random() - 0.5) * 200;
+        const cp2y = end.y + (Math.random() - 0.5) * 200;
+        
+        // Random colors for chaos: mostly gray/blue, some red/yellow
+        const rand = Math.random();
+        if(rand > 0.9) ctx.strokeStyle = 'rgba(239, 68, 68, 0.4)'; // Red
+        else if(rand > 0.8) ctx.strokeStyle = 'rgba(245, 158, 11, 0.4)'; // Amber
+        else ctx.strokeStyle = 'rgba(148, 163, 184, 0.2)'; // Slate
+        
+        ctx.beginPath();
+        ctx.moveTo(start.x, start.y);
+        ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, end.x, end.y);
+        ctx.stroke();
+      }
+      
+      // Draw node dot
+      ctx.fillStyle = '#64748B';
+      ctx.beginPath();
+      ctx.arc(start.x, start.y, 4, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+  
+  drawChaos();
+</script>
+<script src="../navigation.js"></script>
+</body>
+</html>
