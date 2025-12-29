@@ -15,10 +15,12 @@
       background-color: #0F172A; /* Slate 900 */
       color: #fff;
       overflow: hidden;
+      width: 100vw;
+      height: 100vh;
     }
     .slide-container {
-      width: 1280px;
-      height: 720px;
+      width: 100vw;
+      height: 100vh;
       position: relative;
       display: flex;
       flex-direction: column;
@@ -173,7 +175,7 @@
 <!-- Node 2: MR/PR Checkpoint (Center - Hero) -->
 <div class="node-card checkpoint-card pulse-glow">
 <div class="checkpoint-badge">
-<i class="fas fa-shield-alt mr-2"></i> CHECK POINT
+<i class="fas fa-shield-alt mr-2"></i> 마지막 검문소
           </div>
 <div class="icon-box bg-blue-500 text-white shadow-lg mt-2">
 <i class="fas fa-tasks"></i>
@@ -186,6 +188,7 @@
 <p><i class="fas fa-check text-blue-300 w-4"></i> 자동화 테스트(CI) 통과</p>
 <p><i class="fas fa-check text-blue-300 w-4"></i> 충돌(Conflict) 해결</p>
 </div>
+<p class="text-red-300 text-xs font-bold mt-2 text-center">동료의 검토 없이는 아무도 이 문을 넘을 수 없습니다</p>
 </div>
 </div>
 <!-- Node 3: Master / Merge (Right) -->
@@ -214,7 +217,8 @@
 <div>
 <p class="text-xl font-medium text-white">
             "MR/PR은 단순한 요청이 아니라,<br/>
-<span class="text-blue-400 font-bold">코드의 품질을 보장하는 최후의 보루</span>입니다."
+<span class="text-blue-400 font-bold">우리 팀의 결과물을 지키기 위한 마지막 검문소</span>입니다.<br/>
+<span class="text-lg text-gray-300 mt-2 block">동료의 검토 없이는 아무도 이 문을 넘을 수 없습니다.</span>"
           </p>
 </div>
 </div>

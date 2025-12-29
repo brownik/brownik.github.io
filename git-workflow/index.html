@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
   <meta charset="utf-8" />
-  <title>Git Workflow Strategy</title>
+  <title>Branch 전략 - Git Workflow Strategy</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     body {
@@ -14,41 +14,83 @@
       align-items: center;
       justify-content: center;
       height: 100vh;
+      width: 100vw;
     }
     .container {
       text-align: center;
+      max-width: 800px;
+      padding: 40px;
+    }
+    .topic {
+      font-size: 16px;
+      color: #60A5FA;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      margin-bottom: 24px;
+      text-transform: uppercase;
     }
     h1 {
-      font-size: 42px;
-      margin-bottom: 12px;
+      font-size: 56px;
+      margin-bottom: 16px;
+      font-weight: 700;
+      line-height: 1.2;
     }
-    p {
+    .subtitle {
       color: #94A3B8;
-      margin-bottom: 32px;
+      font-size: 20px;
+      margin-bottom: 48px;
     }
-    a.start {
-      display: inline-block;
-      padding: 14px 32px;
-      border-radius: 9999px;
-      background: #2563EB;
-      color: white;
+    .presenter {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(30, 41, 59, 0.6);
+      padding: 12px 24px;
+      border-radius: 8px;
+      margin-bottom: 48px;
+      border: 1px solid rgba(148, 163, 184, 0.1);
+    }
+    .presenter-label {
+      color: #94A3B8;
+      font-size: 14px;
+    }
+    .presenter-name {
+      color: #F1F5F9;
       font-size: 18px;
-      text-decoration: none;
+      font-weight: 600;
     }
-    a.start:hover {
-      background: #1D4ED8;
+    .hint {
+      color: #64748B;
+      font-size: 14px;
+      margin-top: 48px;
+      opacity: 0.7;
     }
   </style>
 </head>
 <body>
   <div class="container">
+    <div class="topic">Branch 전략</div>
     <h1>Git Workflow Strategy</h1>
-    <p>발표 자료</p>
+    <p class="subtitle">안전하고 효율적인 협업을 위한 Git 브랜치 전략</p>
+    
+    <div class="presenter">
+      <span class="presenter-label">발표자</span>
+      <span class="presenter-name">신동익</span>
+    </div>
 
-    <!-- 핵심: slide 폴더로 이동 -->
-    <a class="start" href="slide/slide-01.html">
-      ▶ 발표 시작
-    </a>
+    <div class="hint">아무 키나 누르면 발표를 시작합니다</div>
   </div>
+  <script>
+    document.addEventListener('keydown', (e) => {
+      // 아무 키나 누르면 첫 번째 슬라이드로 이동
+      e.preventDefault();
+      window.location.href = 'slide/slide-01.html';
+    });
+    
+    // 클릭해도 시작 가능하도록
+    document.addEventListener('click', () => {
+      window.location.href = 'slide/slide-01.html';
+    });
+  </script>
 </body>
 </html>

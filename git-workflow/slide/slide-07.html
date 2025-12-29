@@ -16,11 +16,13 @@
         color: #fff;
         overflow: hidden;
         font-family: 'Noto Sans KR', sans-serif;
+        width: 100vw;
+        height: 100vh;
     }
     
     .slide-container {
-        width: 1280px;
-        height: 720px;
+        width: 100vw;
+        height: 100vh;
         position: relative;
         display: flex;
         flex-direction: column;
@@ -43,7 +45,7 @@
         height: 120px;
         display: flex;
         align-items: center;
-        padding-left: 200px; /* Space for labels */
+        padding-left: 200px;
         border-bottom: 1px dashed rgba(255,255,255,0.05);
     }
     
@@ -88,6 +90,29 @@
         height: 100%;
         z-index: 10;
         pointer-events: none;
+    }
+    
+    /* Diagram container - centered and scaled */
+    .diagram-container {
+        position: relative;
+        width: 1280px;
+        height: 450px;
+        max-width: 90vw;
+        max-height: 60vh;
+        margin: 0 auto;
+        transform-origin: center;
+    }
+    
+    @media (max-width: 1400px) {
+        .diagram-container {
+            transform: scale(0.9);
+        }
+    }
+    
+    @media (max-width: 1200px) {
+        .diagram-container {
+            transform: scale(0.8);
+        }
     }
 
     /* Node Styles (HTML overlay on SVG points) */
@@ -173,9 +198,10 @@
         </p>
 </div>
 <!-- Diagram Container -->
-<div class="flex-1 relative mt-4 mx-12 mb-8 bg-slate-800/30 rounded-xl border border-slate-700 backdrop-blur-sm overflow-hidden">
+<div class="flex-1 relative mt-4 mx-8 mb-8 flex items-center justify-center">
+<div class="diagram-container bg-slate-800/30 rounded-xl border border-slate-700 backdrop-blur-sm overflow-hidden">
 <!-- SVG Layer for Lines -->
-<svg class="diagram-svg" preserveaspectratio="xMidYMid meet" viewbox="0 0 1184 450">
+<svg class="diagram-svg" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1184 450">
 <!-- Definitions for gradients/filters -->
 <defs>
 <marker id="arrow-master" markerheight="10" markerunits="strokeWidth" markerwidth="10" orient="auto" refx="8" refy="3">
@@ -205,13 +231,13 @@
 <div class="branch-lane">
 <div class="lane-label">
 <div class="label-badge bg-red-900/50 text-red-400 border border-red-500/30">Main</div>
-<p class="label-desc">고객이 사용하는<br/>최종 배포 버전<br/><span class="text-xs text-red-300">(Production 전용)</span></p>
+<p class="label-desc">고객이 사용하는<br/>완성본<br/><span class="text-xs text-red-300">(Tagging 기반)</span></p>
 </div>
-<!-- Nodes -->
+<!-- Nodes - Main 브랜치 선(y=80) 위에 정확히 배치 -->
 <div class="node bg-red-500" style="left: 250px; top: 80px;">
 <div class="node-tag text-red-300 border-red-500/30">v1.0.0</div>
 </div>
-<!-- Final Release Node -->
+<!-- Final Release Node - Master에서 Main으로 병합된 지점 -->
 <div class="node bg-red-500" style="left: 960px; top: 80px; width: 20px; height: 20px; border-width: 4px;">
 <div class="node-tag text-red-100 bg-red-900 border-red-500 font-bold">v1.1.0</div>
 </div>
@@ -222,29 +248,32 @@
 <div class="label-badge bg-blue-900/50 text-blue-400 border border-blue-500/30">Master</div>
 <p class="label-desc">다음 배포를 위한<br/>통합/검증 공간<br/><span class="text-xs text-blue-300">(Development/Staging)</span></p>
 </div>
-<!-- Start Node -->
-<div class="node bg-blue-500" style="left: 250px; top: 225px;"></div>
+<!-- Start Node - Master 브랜치 시작점 -->
+<div class="node bg-blue-500" style="left: 250px; top: 225px;">
+<div class="node-tag text-blue-300 border-blue-500/30" style="top: -30px;">초기 상태</div>
+</div>
+<!-- Master 브랜치 커밋들 -->
 <div class="node bg-blue-500" style="left: 350px; top: 225px;"></div>
-<!-- Merge Node -->
+<!-- Merge Node - Feature에서 Master로 병합된 지점 (Master 브랜치 선 y=225 위) -->
 <div class="node bg-blue-500" style="left: 850px; top: 225px; width: 18px; height: 18px;">
 <div class="action-label" style="top: -40px; left: -20px;">
 <i class="fas fa-code-branch mr-1"></i>Merge
                     </div>
 </div>
-<!-- Release Prep Node -->
+<!-- Release Prep Node - Main으로 배포 준비된 지점 -->
 <div class="node bg-blue-500" style="left: 900px; top: 225px;"></div>
 </div>
 <!-- Lane 3: Feature -->
 <div class="branch-lane">
 <div class="lane-label">
 <div class="label-badge bg-slate-700/50 text-slate-300 border border-slate-500/30">Feature</div>
-<p class="label-desc">이슈 해결을 위한<br/>임시 작업실</p>
+<p class="label-desc">이슈별로 생성되고<br/>사라지는 개인 작업실</p>
 </div>
-<!-- Branch Out Action -->
+<!-- Branch Out Action - Master에서 Feature 브랜치 생성 -->
 <div class="action-label bg-slate-800 text-slate-300 border-slate-600" style="left: 350px; top: 280px;">
 <i class="fas fa-plus mr-1"></i>New Branch
                 </div>
-<!-- Feature Commits -->
+<!-- Feature Commits - Feature 브랜치 선(y=370) 위에 정확히 배치 -->
 <div class="node bg-slate-400" style="left: 480px; top: 370px;">
 <div class="node-tag text-slate-400 border-slate-600">commit</div>
 </div>
@@ -254,10 +283,15 @@
 <div class="node bg-slate-400" style="left: 680px; top: 370px;">
 <div class="node-tag text-slate-400 border-slate-600">commit</div>
 </div>
-<!-- MR Request Label -->
+<!-- MR Request Label - MR/PR 요청 시점 -->
 <div class="action-label bg-purple-900/80 text-purple-200 border-purple-500/50" style="left: 720px; top: 300px;">
-<i class="fas fa-file-signature mr-1"></i>MR / PR Open
+<i class="fas fa-file-signature mr-1"></i>MR / PR
                 </div>
+<!-- Merge back to Master label - Master로 병합되는 지점 -->
+<div class="action-label bg-blue-900/80 text-blue-200 border-blue-500/50" style="left: 800px; top: 300px;">
+<i class="fas fa-code-branch mr-1"></i>Merge
+                </div>
+</div>
 </div>
 </div>
 </div>

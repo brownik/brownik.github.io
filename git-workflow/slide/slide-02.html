@@ -14,10 +14,13 @@
       padding: 0;
       background-color: #0F172A; /* Slate 900 */
       color: #fff;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
     }
     .slide-container {
-      width: 1280px;
-      height: 720px;
+      width: 100vw;
+      height: 100vh;
       position: relative;
       display: flex;
       flex-direction: column;
@@ -228,9 +231,19 @@
   const canvas = document.getElementById('chaosCanvas');
   const ctx = canvas.getContext('2d');
   
-  // Set canvas size (adjust for container size, simplified for this static render context)
-  canvas.width = 704; // approx 55% of 1280
-  canvas.height = 640; // approx height minus header
+  // Set canvas size dynamically based on container
+  function resizeCanvas() {
+    const leftPanel = document.querySelector('.left-panel');
+    if (leftPanel) {
+      canvas.width = leftPanel.offsetWidth;
+      canvas.height = leftPanel.offsetHeight;
+      drawChaos();
+    }
+  }
+  
+  // Initial resize and on window resize
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
 
   function drawChaos() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
